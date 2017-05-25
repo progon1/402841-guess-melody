@@ -1,7 +1,7 @@
 # Личный проект «Угадай мелодию» [![Build status][travis-image]][travis-url]
 
 * Студент: [Виктор Прогонный](https://up.htmlacademy.ru/ecmascript/2/user/402841).
-* Наставник: `Неизвестно`.
+* Наставник: [Игорь Шевченко](https://htmlacademy.ru/profile/id149304).
 
 ---
 
