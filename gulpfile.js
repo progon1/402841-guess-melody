@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 const del = require('del');
 const gulp = require('gulp');
@@ -88,9 +88,9 @@ gulp.task('serve', ['assemble'], function () {
 
   gulp.watch('sass/**/*.{scss,sass}', ['style']);
   gulp.watch('*.html').on('change', (e) => {
-    if (e.type !== 'deleted') {
-      gulp.start('copy-html');
-    }
+      if (e.type !== 'deleted') {
+          gulp.start('copy-html');
+      }
   });
   gulp.watch('js/**/*.js', ['js-watch']);
 });
