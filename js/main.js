@@ -1,6 +1,31 @@
 const template = document.querySelector(`#templates`);
-const screens = template.content.querySelectorAll(`section.main`);
+let screens = template.content.querySelectorAll(`section.main`);
 const target = document.querySelector(`.app .main`);
+const LEFT_ARROW = 37;
+const RIGHT_ARROW = 39;
+const mainOrder = [`main--welcome`, `main--level-genre`, `main--level-artist`, `main--result`, `main--result`];
+
+
+const sortScreens = function (order, ...pScreens) {
+  const arr = [];
+
+  for (let i = 0; i < order.length; i++) {
+    const idx = pScreens.findIndex((item) => {
+      return item.classList.contains(order[i]);
+    });
+    const element = pScreens.splice(idx, 1);
+    arr.push(...element);
+  }
+
+  if (arr[3].children.length < arr[4].children.length) {
+    const [,,, third, fourth] = arr;
+    arr.splice(3, 2, fourth, third);
+  }
+
+  pScreens.push(...arr);
+  return pScreens;
+};
+screens = sortScreens(mainOrder, ...screens);
 
 const showScreen = (num) => {
   if (target.children.length) {
@@ -8,17 +33,14 @@ const showScreen = (num) => {
   } else {
     target.appendChild(screens[num]);
   }
-
 };
 
-let currentScreenIdx = Array.prototype.findIndex.call(screens, (screen) => {
-  return screen.classList.contains(`main--welcome`);
-});
+let currentScreenIdx = 0;
 
 showScreen(currentScreenIdx);
 
 document.addEventListener(`keydown`, (evt) => {
-  if (evt.altKey && evt.keyCode === 39) {
+  if (evt.altKey && evt.keyCode === RIGHT_ARROW) {
     if (currentScreenIdx === screens.length - 1) {
       currentScreenIdx = -1;
     }
@@ -26,7 +48,7 @@ document.addEventListener(`keydown`, (evt) => {
     showScreen(++currentScreenIdx);
   }
 
-  if (evt.altKey && evt.keyCode === 37) {
+  if (evt.altKey && evt.keyCode === LEFT_ARROW) {
     evt.preventDefault();
     if (currentScreenIdx === 0) {
       currentScreenIdx = screens.length;
@@ -35,4 +57,3 @@ document.addEventListener(`keydown`, (evt) => {
     showScreen(--currentScreenIdx);
   }
 });
-
