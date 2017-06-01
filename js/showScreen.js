@@ -1,7 +1,11 @@
 const target = document.querySelector(`.app .main`);
 
 const showScreen = (element) => {
-  target.replaceChild(element, target.firstElementChild);
+  if (target.firstElementChild) {
+    target.replaceChild(element, target.firstElementChild);
+  } else {
+    target.appendChild(element);
+  }
 };
 
 export default showScreen;

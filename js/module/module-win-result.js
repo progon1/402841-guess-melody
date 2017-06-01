@@ -1,7 +1,7 @@
 // Результат игры
 import getElementFromTemplate from '../getElementFromTemplate';
 import showScreen from './../showScreen';
-import welcom from './module-welcome';
+import welcome from './module-welcome';
 
 const winResult = getElementFromTemplate(`
   <section class="main main--result">
@@ -16,7 +16,7 @@ const winResult = getElementFromTemplate(`
 
 const playAgain = winResult.querySelector(`span.main-replay`);
 playAgain.addEventListener(`click`, (evt) => {
-  showScreen(welcom);
+  showScreen(welcome);
 });
 
 export default winResult;

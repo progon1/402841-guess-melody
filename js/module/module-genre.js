@@ -39,10 +39,11 @@ const genre = getElementFromTemplate(`
 `);
 const button = genre.querySelector(`button.genre-answer-send`);
 button.disabled = true;
-const answers = genre.getElementsByTagName(`input`);
+const answers = genre.querySelectorAll(`input`);
 answers.find = Array.prototype.find;
 
-genre.addEventListener(`change`, (evt) => {
+const container = genre.querySelector(`.main--level-genre`);
+container.addEventListener(`change`, (evt) => {
   if (evt.target.nodeName === `INPUT`) {
     const isChecked = answers.find((item) => {
       return item.checked;

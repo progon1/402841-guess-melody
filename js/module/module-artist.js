@@ -52,7 +52,8 @@ const artist = getElementFromTemplate(`
   </section>
 `);
 
-artist.addEventListener(`click`, (evt) => {
+const container = artist.querySelector(`.main-wrap`);
+container.addEventListener(`click`, (evt) => {
   if (evt.target.classList.contains(`main-answer-r`)) {
     showScreen(genre);
   }
