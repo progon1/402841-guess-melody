@@ -15,7 +15,7 @@ const winResult = getElementFromTemplate(`
 `);
 
 const playAgain = winResult.querySelector(`span.main-replay`);
-playAgain.addEventListener(`click`, (evt) => {
+playAgain.addEventListener(`click`, () => {
   showScreen(welcome);
 });
 

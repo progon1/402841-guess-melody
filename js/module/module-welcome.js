@@ -15,6 +15,7 @@ const welcome = getElementFromTemplate(`
     </p>
   </section>
 `);
+
 const button = welcome.querySelector(`button.main-play`);
 button.addEventListener(`click`, () => {
   showScreen(artist);

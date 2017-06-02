@@ -42,7 +42,8 @@ button.disabled = true;
 const answers = genre.querySelectorAll(`input`);
 answers.find = Array.prototype.find;
 
-const container = genre.querySelector(`.main--level-genre`);
+const container = genre.querySelector(`.genre`);
+
 container.addEventListener(`change`, (evt) => {
   if (evt.target.nodeName === `INPUT`) {
     const isChecked = answers.find((item) => {

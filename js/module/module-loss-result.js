@@ -2,7 +2,6 @@
 import getElementFromTemplate from '../getElementFromTemplate';
 import showScreen from './../showScreen';
 import welcome from './module-welcome';
-import artist from './module-artist';
 
 const lossResult = getElementFromTemplate(`
   <section class="main main--result">
@@ -16,7 +15,7 @@ const lossResult = getElementFromTemplate(`
 
 const playAgain = lossResult.querySelector(`span.main-replay`);
 playAgain.addEventListener(`click`, () => {
-  showScreen(artist);
+  showScreen(welcome);
 });
 
 export default lossResult;
