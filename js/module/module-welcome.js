@@ -1,11 +1,14 @@
 // Приветствие
-import getElementFromTemplate from './../getElementFromTemplate';
-import showScreen from './../showScreen';
+import getElementFromTemplate from './../utils/getElementFromTemplate';
+import showScreen from './../utils/showScreen';
 import artist from './module-artist';
 
-const welcome = getElementFromTemplate(`
-<section class="main main--welcome">
-    <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
+export default () => {
+  const logoTemplate = getElementFromTemplate(`
+  <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
+  `);
+
+  const content = getElementFromTemplate(`
     <button class="main-play">Начать игру</button>
     <h2 class="title main-title">Правила игры</h2>
     <p class="text main-text">
@@ -13,12 +16,19 @@ const welcome = getElementFromTemplate(`
       максимальное количество правильных ответов.<br>
       Удачи!
     </p>
-  </section>
+  `);
+
+  const screenTemplate = getElementFromTemplate(`
+    <section class="main main--welcome"></section>
 `);
 
-const button = welcome.querySelector(`button.main-play`);
-button.addEventListener(`click`, () => {
-  showScreen(artist);
-});
+  const screen = screenTemplate.querySelector(`.main--welcome`);
+  screen.appendChild(logoTemplate);
+  screen.appendChild(content);
 
-export default welcome;
+  const button = screenTemplate.querySelector(`button.main-play`);
+  button.addEventListener(`click`, () => {
+    showScreen(artist());
+  });
+  return screenTemplate;
+};

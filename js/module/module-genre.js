@@ -1,11 +1,12 @@
 // Игра на выбор жанра
-import getElementFromTemplate from '../getElementFromTemplate';
-import showScreen from './../showScreen';
+import getElementFromTemplate from '../utils/getElementFromTemplate';
+import showScreen from './../utils/showScreen';
 import winResult from './module-win-result';
 import lossResult from './module-loss-result';
 const option = [winResult, lossResult];
 
-const genre = getElementFromTemplate(`
+export default () => {
+  const genre = getElementFromTemplate(`
   <section class="main main--level main--level-genre">
     <h2 class="title">Выберите инди-рок треки</h2>
     <form class="genre">
@@ -37,28 +38,29 @@ const genre = getElementFromTemplate(`
     </form>
   </section>
 `);
-const button = genre.querySelector(`button.genre-answer-send`);
-button.disabled = true;
-const answers = genre.querySelectorAll(`input`);
-answers.find = Array.prototype.find;
+  const button = genre.querySelector(`button.genre-answer-send`);
+  button.disabled = true;
+  const answers = genre.querySelectorAll(`input`);
+  answers.find = Array.prototype.find;
 
-const container = genre.querySelector(`.genre`);
+  const container = genre.querySelector(`.genre`);
 
-container.addEventListener(`change`, (evt) => {
-  if (evt.target.nodeName === `INPUT`) {
-    const isChecked = answers.find((item) => {
-      return item.checked;
-    });
-    if (isChecked) {
-      button.disabled = false;
-    } else {
-      button.disabled = true;
+  container.addEventListener(`change`, (evt) => {
+    if (evt.target.nodeName === `INPUT`) {
+      const isChecked = answers.find((item) => {
+        return item.checked;
+      });
+      if (isChecked) {
+        button.disabled = false;
+      } else {
+        button.disabled = true;
+      }
     }
-  }
-});
+  });
 
-button.addEventListener(`click`, () => {
-  showScreen(option[Math.floor(Math.random() * 2)]);
-});
+  button.addEventListener(`click`, () => {
+    showScreen(option[Math.floor(Math.random() * 2)]());
+  });
 
-export default genre;
+  return genre;
+};

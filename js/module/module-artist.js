@@ -1,9 +1,11 @@
 // Выбор исполнителя: уровень
-import getElementFromTemplate from '../getElementFromTemplate';
-import showScreen from './../showScreen';
+import getElementFromTemplate from '../utils/getElementFromTemplate';
+import showScreen from './../utils/showScreen';
 import genre from './module-genre';
 
-const artist = getElementFromTemplate(`
+
+export default (data) => {
+  const artistTemplate = `
 <section class="main main--level main--level-artist">
     <svg xmlns="http://www.w3.org/2000/svg" class="timer" viewBox="0 0 780 780">
       <circle
@@ -50,13 +52,16 @@ const artist = getElementFromTemplate(`
       </form>
     </div>
   </section>
-`);
+`;
 
-const container = artist.querySelector(`.main-wrap`);
-container.addEventListener(`click`, (evt) => {
-  if (evt.target.classList.contains(`main-answer-r`)) {
-    showScreen(genre);
-  }
-});
+  const artist = getElementFromTemplate(artistTemplate);
 
-export default artist;
+  const container = artist.querySelector(`.main-wrap`);
+  container.addEventListener(`click`, (evt) => {
+    if (evt.target.classList.contains(`main-answer-r`)) {
+      showScreen(genre());
+    }
+  });
+
+  return artist;
+};
