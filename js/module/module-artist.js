@@ -1,54 +1,27 @@
 // Выбор исполнителя: уровень
 import getElementFromTemplate from '../utils/getElementFromTemplate';
 import showScreen from './../utils/showScreen';
-import genre from './module-genre';
-
+import genreScreen from './module-genre';
+import resultScreen from './module-result';
+import artistList from '../components/artist-list';
+import timer from '../components/timer';
+import game from '../data/game';
+import lossResult from '../data/result/loss';
+import player from '../components/player';
+import genre from '../data/genre';
 
 export default (data) => {
   const artistTemplate = `
 <section class="main main--level main--level-artist">
-    <svg xmlns="http://www.w3.org/2000/svg" class="timer" viewBox="0 0 780 780">
-      <circle
-        cx="390" cy="390" r="370"
-        class="timer-line"
-        style="filter: url(.#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center"></circle>
-
-      <div class="timer-value" xmlns="http://www.w3.org/1999/xhtml">
-        <span class="timer-value-mins">02</span><!--
-        --><span class="timer-value-dots">:</span><!--
-        --><span class="timer-value-secs">00</span>
-      </div>
-    </svg>
+    ${timer(game.time)}
 
     <div class="main-wrap">
       <div class="main-timer"></div>
 
       <h2 class="title main-title">Кто исполняет эту песню?</h2>
-      <div class="player-wrapper"></div>
+      ${player}
       <form class="main-list">
-        <div class="main-answer-wrapper">
-          <input class="main-answer-r" type="radio" id="answer-1" name="answer" value="val-1" />
-          <label class="main-answer" for="answer-1">
-            <img class="main-answer-preview" src="">
-            Пелагея
-          </label>
-        </div>
-
-        <div class="main-answer-wrapper">
-          <input class="main-answer-r" type="radio" id="answer-2" name="answer" value="val-1" />
-          <label class="main-answer" for="answer-2">
-            <img class="main-answer-preview" src="">
-            Краснознаменная дивизия имени моей бабушки
-          </label>
-        </div>
-
-        <div class="main-answer-wrapper">
-          <input class="main-answer-r" type="radio" id="answer-2" name="answer" value="val-1" />
-          <label class="main-answer" for="answer-2">
-            <img class="main-answer-preview" src="">
-            Lorde
-          </label>
-        </div>
+        ${artistList(data.songs)}
       </form>
     </div>
   </section>
@@ -56,12 +29,21 @@ export default (data) => {
 
   const artist = getElementFromTemplate(artistTemplate);
 
-  const container = artist.querySelector(`.main-wrap`);
+  const container = artist.querySelector(`.main-list`);
   container.addEventListener(`click`, (evt) => {
+
     if (evt.target.classList.contains(`main-answer-r`)) {
-      showScreen(genre());
+      if (data.trackArtist.toLowerCase() === evt.target.getAttribute(`value`)) {
+        showScreen(genreScreen(genre));
+      } else {
+        showScreen(resultScreen(lossResult));
+      }
     }
+
   });
+
+  const playerWrapper = artist.querySelector(`.player-wrapper`);
+  window.initializePlayer(playerWrapper, `tracks/${data.trackName}`);
 
   return artist;
 };

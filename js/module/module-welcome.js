@@ -2,11 +2,11 @@
 import getElementFromTemplate from './../utils/getElementFromTemplate';
 import showScreen from './../utils/showScreen';
 import artist from './module-artist';
+import appLogo from '../components/app-logo';
+import songs from '../data/songs';
 
 export default () => {
-  const logoTemplate = getElementFromTemplate(`
-  <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
-  `);
+  const logoTemplate = getElementFromTemplate(appLogo);
 
   const content = getElementFromTemplate(`
     <button class="main-play">Начать игру</button>
@@ -28,7 +28,7 @@ export default () => {
 
   const button = screenTemplate.querySelector(`button.main-play`);
   button.addEventListener(`click`, () => {
-    showScreen(artist());
+    showScreen(artist(songs));
   });
   return screenTemplate;
 };
