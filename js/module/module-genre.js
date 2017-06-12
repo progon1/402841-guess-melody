@@ -30,21 +30,15 @@ export default (data) => {
       const isChecked = answers.find((item) => {
         return item.checked;
       });
-      if (isChecked) {
-        button.disabled = false;
-      } else {
-        button.disabled = true;
-      }
+
+      button.disabled = !isChecked;
     }
   });
 
   container.addEventListener(`submit`, (evt) => {
     evt.preventDefault();
-  });
 
-  button.addEventListener(`click`, () => {
     const isAllCheckedCorrectly = inputs.every((input) => {
-
       if (data.currentGenre === input.value) {
         return input.checked;
       } else {
@@ -52,11 +46,7 @@ export default (data) => {
       }
     });
 
-    if (isAllCheckedCorrectly) {
-      showScreen(result(winResult));
-    } else {
-      showScreen(result(lossResult));
-    }
+    showScreen(result(isAllCheckedCorrectly ? winResult : lossResult));
   });
 
 
