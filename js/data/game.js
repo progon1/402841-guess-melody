@@ -1,6 +1,7 @@
-export default Object.freeze({
-  time: {
-    minutes: `02`,
-    seconds: `00`
-  }
+const initialState = Object.freeze({
+  question: `question-1`,
+  lives: 3,
+  time: 2000
 });
+
+export default initialState;

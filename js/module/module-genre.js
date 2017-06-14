@@ -5,6 +5,7 @@ import winResult from '../data/result/win';
 import lossResult from '../data/result/loss';
 import genreList from '../components/genre-list';
 import result from './module-result';
+import isAllCheckedCorrectly from '../utils/check-genre';
 
 export default (data) => {
   const genre = getElementFromTemplate(`
@@ -38,15 +39,7 @@ export default (data) => {
   container.addEventListener(`submit`, (evt) => {
     evt.preventDefault();
 
-    const isAllCheckedCorrectly = inputs.every((input) => {
-      if (data.currentGenre === input.value) {
-        return input.checked;
-      } else {
-        return !input.checked;
-      }
-    });
-
-    showScreen(result(isAllCheckedCorrectly ? winResult : lossResult));
+    showScreen(result(isAllCheckedCorrectly(inputs, data) ? winResult : lossResult));
   });
 
 

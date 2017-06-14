@@ -1,9 +1,12 @@
 // Приветствие
 import getElementFromTemplate from './../utils/getElementFromTemplate';
-import showScreen from './../utils/showScreen';
-import artist from './module-artist';
+// import showScreen from './../utils/showScreen';
+// import artist from './module-artist';
+// import songs from '../data/songs';
 import appLogo from '../components/app-logo';
-import songs from '../data/songs';
+import initialState from '../data/game';
+import questionList from '../data/questions-list';
+import switchNextScreen from '../utils/switchNextScreen';
 
 export default () => {
   const logoTemplate = getElementFromTemplate(appLogo);
@@ -28,7 +31,8 @@ export default () => {
 
   const button = screenTemplate.querySelector(`button.main-play`);
   button.addEventListener(`click`, () => {
-    showScreen(artist(songs));
+    window.sessionStorage.setItem(`currentQuestion`, initialState.question);
+    switchNextScreen(questionList[initialState.question].type);
   });
   return screenTemplate;
 };
