@@ -1,8 +1,5 @@
 // Приветствие
 import getElementFromTemplate from './../utils/getElementFromTemplate';
-// import showScreen from './../utils/showScreen';
-// import artist from './module-artist';
-// import songs from '../data/songs';
 import appLogo from '../components/app-logo';
 import initialState from '../data/game';
 import questionList from '../data/questions-list';
