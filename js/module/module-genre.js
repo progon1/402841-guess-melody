@@ -1,11 +1,15 @@
 // Игра на выбор жанра
 import getElementFromTemplate from '../utils/getElementFromTemplate';
-import showScreen from './../utils/showScreen';
-import winResult from '../data/result/win';
-import lossResult from '../data/result/loss';
+// import showScreen from './../utils/showScreen';
+// import winResult from '../data/result/win';
+// import lossResult from '../data/result/loss';
 import genreList from '../components/genre-list';
-import result from './module-result';
+// import result from './module-result';
 import isAllCheckedCorrectly from '../utils/check-genre';
+import isQuestionOver from './../utils/isQuestionOver';
+import switchNextScreen from './../utils/switchNextScreen';
+import switchQuestion from './../utils/switchQuestion';
+import questionList from '../data/questions-list';
 
 export default (data) => {
   const genre = getElementFromTemplate(`
@@ -39,7 +43,17 @@ export default (data) => {
   container.addEventListener(`submit`, (evt) => {
     evt.preventDefault();
 
-    showScreen(result(isAllCheckedCorrectly(inputs, data) ? winResult : lossResult));
+    if (isAllCheckedCorrectly(inputs, data)) {
+      const currentQuestion = window.sessionStorage.getItem(`currentQuestion`);
+      const nextQuestion = switchQuestion(currentQuestion);
+      window.sessionStorage.setItem(`currentQuestion`, nextQuestion);
+      const result = isQuestionOver(currentQuestion) ?
+        `win` : questionList[nextQuestion].type;
+
+      switchNextScreen(result);
+    } else {
+      switchNextScreen(`loss`);
+    }
   });
 
 

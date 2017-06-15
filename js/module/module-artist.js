@@ -1,12 +1,12 @@
 // Выбор исполнителя: уровень
 import getElementFromTemplate from '../utils/getElementFromTemplate';
-import showScreen from './../utils/showScreen';
+// import showScreen from './../utils/showScreen';
 // import genreScreen from './module-genre';
-import resultScreen from './module-result';
+// import resultScreen from './module-result';
 import artistList from '../components/artist-list';
 import timer from '../components/timer';
 import game from '../data/game';
-import lossResult from '../data/result/loss';
+// import lossResult from '../data/result/loss';
 import player from '../components/player';
 // import genre from '../data/genre';
 import questionList from '../data/questions-list';
@@ -39,9 +39,10 @@ export default (data) => {
       if (data.trackArtist.toLowerCase() === evt.target.getAttribute(`value`)) {
         // showScreen(genreScreen(genre));
         const nextQuestion = switchQuestion(window.sessionStorage.getItem(`currentQuestion`));
+        window.sessionStorage.setItem(`currentQuestion`, nextQuestion);
         switchNextScreen(questionList[nextQuestion].type);
       } else {
-        showScreen(resultScreen(lossResult));
+        switchNextScreen(`loss`);
       }
     }
 

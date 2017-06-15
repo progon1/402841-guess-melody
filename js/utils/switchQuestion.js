@@ -1,5 +1,6 @@
 export default (question) => {
-  const number = +question.slice(-1) + 1;
+  const nextNumber = +question.slice(-1) + 1;
+  const nextQuestion = question.slice(0, -1) + nextNumber;
 
-  return question.slice(0, -1) + number;
+  return nextQuestion;
 };

@@ -32,6 +32,17 @@ export default () => {
   const button = screenTemplate.querySelector(`button.main-play`);
   button.addEventListener(`click`, () => {
     window.sessionStorage.setItem(`currentQuestion`, initialState.question);
+    window.currentTimer = initialState.time;
+
+    let timerID = setInterval(() => {
+      --window.currentTimer;
+    }, 1000);
+
+    setTimeout(() => {
+      clearInterval(timerID);
+      switchNextScreen(`loss`);
+    }, initialState.time * 1000);
+
     switchNextScreen(questionList[initialState.question].type);
   });
   return screenTemplate;
