@@ -15,7 +15,7 @@ export default () => {
     <button class="main-play">Начать игру</button>
     <h2 class="title main-title">Правила игры</h2>
     <p class="text main-text">
-      Правила просты&nbsp;— за&nbsp;2 минуты дать
+      Правила просты&nbsp;— за&nbsp;${initialState.time / 60} минуты дать
       максимальное количество правильных ответов.<br>
       Удачи!
     </p>

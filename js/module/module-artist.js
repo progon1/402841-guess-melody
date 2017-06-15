@@ -13,6 +13,7 @@ import questionList from '../data/questions-list';
 import switchNextScreen from '../utils/switchNextScreen';
 import switchQuestion from '../utils/switchQuestion';
 import reduceLives from '../utils/reduceLives';
+import isQuestionOver from './../utils/isQuestionOver';
 
 export default (data) => {
   const artistTemplate = `
@@ -39,9 +40,13 @@ export default (data) => {
     if (evt.target.classList.contains(`main-answer-r`)) {
       if (data.trackArtist.toLowerCase() === evt.target.getAttribute(`value`)) {
 
-        const nextQuestion = switchQuestion(window.sessionStorage.getItem(`currentQuestion`));
+        const currentQuestion = window.sessionStorage.getItem(`currentQuestion`);
+        const nextQuestion = switchQuestion(currentQuestion);
         window.sessionStorage.setItem(`currentQuestion`, nextQuestion);
-        switchNextScreen(questionList[nextQuestion].type);
+        const result = isQuestionOver(currentQuestion) ?
+          `win` : questionList[nextQuestion].type;
+
+        switchNextScreen(result);
       } else {
         const currentLives = reduceLives(window.sessionStorage.getItem(`numberOfLive`));
 
