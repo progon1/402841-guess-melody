@@ -12,6 +12,7 @@ import player from '../components/player';
 import questionList from '../data/questions-list';
 import switchNextScreen from '../utils/switchNextScreen';
 import switchQuestion from '../utils/switchQuestion';
+import reduceLives from '../utils/reduceLives';
 
 export default (data) => {
   const artistTemplate = `
@@ -37,15 +38,24 @@ export default (data) => {
 
     if (evt.target.classList.contains(`main-answer-r`)) {
       if (data.trackArtist.toLowerCase() === evt.target.getAttribute(`value`)) {
-        // showScreen(genreScreen(genre));
+
         const nextQuestion = switchQuestion(window.sessionStorage.getItem(`currentQuestion`));
         window.sessionStorage.setItem(`currentQuestion`, nextQuestion);
         switchNextScreen(questionList[nextQuestion].type);
       } else {
-        switchNextScreen(`loss`);
+        const currentLives = reduceLives(window.sessionStorage.getItem(`numberOfLive`));
+
+        if (currentLives) {
+          window.sessionStorage.setItem(`numberOfLive`, currentLives);
+
+          const nextQuestion = switchQuestion(window.sessionStorage.getItem(`currentQuestion`));
+          window.sessionStorage.setItem(`currentQuestion`, nextQuestion);
+          switchNextScreen(questionList[nextQuestion].type);
+        } else {
+          switchNextScreen(`loss`);
+        }
       }
     }
-
   });
 
   const playerWrapper = artist.querySelector(`.player-wrapper`);

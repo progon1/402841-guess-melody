@@ -1,3 +1,3 @@
-export default (state) => {
-  return Object.assign({}, state, {lives: state.lives - 1});
+export default (lives) => {
+  return --lives;
 };

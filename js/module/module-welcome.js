@@ -32,6 +32,7 @@ export default () => {
   const button = screenTemplate.querySelector(`button.main-play`);
   button.addEventListener(`click`, () => {
     window.sessionStorage.setItem(`currentQuestion`, initialState.question);
+    window.sessionStorage.setItem(`numberOfLive`, initialState.lives);
     window.currentTimer = initialState.time;
 
     let timerID = setInterval(() => {
