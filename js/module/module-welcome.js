@@ -30,10 +30,10 @@ export default () => {
   button.addEventListener(`click`, () => {
     window.sessionStorage.setItem(`currentQuestion`, initialState.question);
     window.sessionStorage.setItem(`numberOfLive`, initialState.lives);
-    window.currentTimer = initialState.time;
+    window.currentTimer = 0;
 
     let timerID = setInterval(() => {
-      --window.currentTimer;
+      ++window.currentTimer;
     }, 1000);
 
     setTimeout(() => {
@@ -42,6 +42,7 @@ export default () => {
     }, initialState.time * 1000);
 
     switchNextScreen(questionList[initialState.question].type);
+    window.initializeCountdown();
   });
   return screenTemplate;
 };

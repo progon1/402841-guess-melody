@@ -1,7 +1,8 @@
 import assert from 'assert';
+import game from './game';
 
-describe(`#indexOf()`, () => {
-  it(`should return -1 when the value is not present`, () => {
-    assert.equal([1, 2, 3].indexOf(4), -1);
+describe(`Checking total game time`, () => {
+  it(`should return 2`, () => {
+    assert.equal(game.time / 60, 2);
   });
 });
