@@ -1,3 +1,6 @@
+import {currentState} from './data/game';
+//import switchNextScreen from './utils/switchNextScreen';
+
 window.animation = {
   getAnimation: (step, stepDuration, steps) => ({
     step, stepDuration, steps
@@ -5,14 +8,16 @@ window.animation = {
 
   animate: (animation, callback, callbackEnd) => {
     const interval = setInterval(() => {
-      const nextStep = animation.step + 1;
-      if (nextStep <= animation.steps) {
-        animation = window.animation.getAnimation(nextStep, animation.stepDuration, animation.steps);
+      window.nextStep = animation.step + 1;
+      currentState.nextStep = window.nextStep;
+      console.log(currentState.nextStep);
+      if (window.nextStep <= animation.steps) {
+        animation = window.animation.getAnimation(window.nextStep, animation.stepDuration, animation.steps);
         callback(animation);
       } else {
         stopFn();
         if (typeof callbackEnd === `function`) {
-          callbackEnd();
+          callbackEnd(animation.stepDuration * animation.steps);
         }
       }
     }, animation.stepDuration);

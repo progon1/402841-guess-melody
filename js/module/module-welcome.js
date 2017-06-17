@@ -1,7 +1,7 @@
 // Приветствие
 import getElementFromTemplate from './../utils/getElementFromTemplate';
 import appLogo from '../components/app-logo';
-import initialState from '../data/game';
+import {initialState} from '../data/game';
 import questionList from '../data/questions-list';
 import switchNextScreen from '../utils/switchNextScreen';
 
@@ -30,7 +30,7 @@ export default () => {
   button.addEventListener(`click`, () => {
     window.sessionStorage.setItem(`currentQuestion`, initialState.question);
     window.sessionStorage.setItem(`numberOfLive`, initialState.lives);
-    window.currentTimer = 0;
+    /*window.currentTimer = 0;
 
     let timerID = setInterval(() => {
       ++window.currentTimer;
@@ -39,10 +39,10 @@ export default () => {
     setTimeout(() => {
       clearInterval(timerID);
       switchNextScreen(`loss`);
-    }, initialState.time * 1000);
+    }, initialState.time * 1000);*/
 
     switchNextScreen(questionList[initialState.question].type);
-    window.initializeCountdown();
+    window.initializeCountdown(0, initialState.dimension, initialState.time);
   });
   return screenTemplate;
 };
