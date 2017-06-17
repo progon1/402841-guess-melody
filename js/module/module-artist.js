@@ -2,7 +2,6 @@
 import getElementFromTemplate from '../utils/getElementFromTemplate';
 import artistList from '../components/artist-list';
 import timer from '../components/timer';
-import {initialState, currentState} from '../data/game';
 import player from '../components/player';
 import doOnSuccess from '../utils/doOnSuccess';
 import doOnFault from '../utils/doOnFault';
@@ -31,7 +30,7 @@ export default (data) => {
 
     if (evt.target.classList.contains(`main-answer-r`)) {
       if (data.trackArtist.toLowerCase() === evt.target.getAttribute(`value`)) {
-        console.log(currentState.nextStep);
+        // console.log(currentState.nextStep);
         doOnSuccess();
 
       } else {

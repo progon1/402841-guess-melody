@@ -4,6 +4,13 @@ import appLogo from '../components/app-logo';
 import {initialState} from '../data/game';
 import questionList from '../data/questions-list';
 import switchNextScreen from '../utils/switchNextScreen';
+import isGameOver from '../utils/isGameOver';
+
+const gameOver = (passedTime) => {
+  if (isGameOver(passedTime)) {
+    switchNextScreen(`loss`);
+  }
+};
 
 export default () => {
   const logoTemplate = getElementFromTemplate(appLogo);
@@ -30,19 +37,9 @@ export default () => {
   button.addEventListener(`click`, () => {
     window.sessionStorage.setItem(`currentQuestion`, initialState.question);
     window.sessionStorage.setItem(`numberOfLive`, initialState.lives);
-    /*window.currentTimer = 0;
-
-    let timerID = setInterval(() => {
-      ++window.currentTimer;
-    }, 1000);
-
-    setTimeout(() => {
-      clearInterval(timerID);
-      switchNextScreen(`loss`);
-    }, initialState.time * 1000);*/
 
     switchNextScreen(questionList[initialState.question].type);
-    window.initializeCountdown(0, initialState.dimension, initialState.time);
+    window.initializeCountdown(0, initialState.dimension, initialState.time, gameOver);
   });
   return screenTemplate;
 };

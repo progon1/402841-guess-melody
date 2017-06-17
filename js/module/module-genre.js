@@ -5,7 +5,6 @@ import timer from '../components/timer';
 import isAllCheckedCorrectly from '../utils/check-genre';
 import doOnSuccess from '../utils/doOnSuccess';
 import doOnFault from '../utils/doOnFault';
-import {currentState} from '../data/game';
 
 export default (data) => {
   const genre = getElementFromTemplate(`

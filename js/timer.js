@@ -1,6 +1,3 @@
-import isGameOver from './utils/isGameOver';
-import switchNextScreen from './utils/switchNextScreen';
-
 // Окружность уменьшается за счет штриховки. Фактически, обводка состоит
 // из одного длинного штриха, а пропуск за счет расстояния до следующего
 // штриха. Задача правильной заливки состоит в том, чтобы правильно
@@ -42,7 +39,7 @@ const redrawTimer = (timer, animation) => {
 };
 
 
-window.initializeCountdown = (step, stepDuration, steps) => {
+window.initializeCountdown = (step, stepDuration, steps, callback) => {
   const element = document.querySelector(`.timer-line`);
   const radius = parseInt(element.getAttributeNS(null, `r`), 10);
   const timer = document.querySelector(`.timer-value`);
@@ -52,8 +49,6 @@ window.initializeCountdown = (step, stepDuration, steps) => {
     redrawTimer(timer, animation);
   }, (passedTime) => {
     timer.classList.add(`timer-value--finished`);
-    if (isGameOver(passedTime)) {
-      switchNextScreen(`loss`);
-    }
+    callback(passedTime);
   });
 };
