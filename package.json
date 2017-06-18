@@ -12,6 +12,7 @@
   "devDependencies": {
     "autoprefixer": "6.7.7",
     "babel-plugin-transform-es2015-modules-commonjs": "6.24.1",
+    "babel-plugin-transform-object-entries": "1.0.0",
     "babel-register": "6.24.1",
     "browser-sync": "2.18.8",
     "css-mqpacker": "6.0.0",
@@ -34,7 +35,8 @@
   },
   "babel": {
     "plugins": [
-      "transform-es2015-modules-commonjs"
+      "transform-es2015-modules-commonjs",
+      "transform-object-entries"
     ]
   }
 }

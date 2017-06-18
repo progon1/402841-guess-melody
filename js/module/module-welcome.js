@@ -1,9 +1,16 @@
 // Приветствие
 import getElementFromTemplate from './../utils/getElementFromTemplate';
-import showScreen from './../utils/showScreen';
-import artist from './module-artist';
 import appLogo from '../components/app-logo';
-import songs from '../data/songs';
+import {initialState} from '../data/game';
+import questionList from '../data/questions-list';
+import switchNextScreen from '../utils/switchNextScreen';
+import isGameOver from '../utils/isGameOver';
+
+const gameOver = (passedTime) => {
+  if (isGameOver(passedTime)) {
+    switchNextScreen(`loss`);
+  }
+};
 
 export default () => {
   const logoTemplate = getElementFromTemplate(appLogo);
@@ -12,7 +19,7 @@ export default () => {
     <button class="main-play">Начать игру</button>
     <h2 class="title main-title">Правила игры</h2>
     <p class="text main-text">
-      Правила просты&nbsp;— за&nbsp;2 минуты дать
+      Правила просты&nbsp;— за&nbsp;${initialState.time / 60} минуты дать
       максимальное количество правильных ответов.<br>
       Удачи!
     </p>
@@ -28,7 +35,11 @@ export default () => {
 
   const button = screenTemplate.querySelector(`button.main-play`);
   button.addEventListener(`click`, () => {
-    showScreen(artist(songs));
+    window.sessionStorage.setItem(`currentQuestion`, initialState.question);
+    window.sessionStorage.setItem(`numberOfLive`, initialState.lives);
+
+    switchNextScreen(questionList[initialState.question].type);
+    window.initializeCountdown(0, initialState.dimension, initialState.time, gameOver);
   });
   return screenTemplate;
 };

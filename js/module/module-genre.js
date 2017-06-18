@@ -1,19 +1,22 @@
 // Игра на выбор жанра
 import getElementFromTemplate from '../utils/getElementFromTemplate';
-import showScreen from './../utils/showScreen';
-import winResult from '../data/result/win';
-import lossResult from '../data/result/loss';
 import genreList from '../components/genre-list';
-import result from './module-result';
+import timer from '../components/timer';
+import isAllCheckedCorrectly from '../utils/check-genre';
+import doOnSuccess from '../utils/doOnSuccess';
+import doOnFault from '../utils/doOnFault';
 
 export default (data) => {
   const genre = getElementFromTemplate(`
   <section class="main main--level main--level-genre">
-    <h2 class="title">Выберите ${data.currentGenreName} треки</h2>
-    <form class="genre">
-      ${genreList(data.tracks)}
-      <button class="genre-answer-send" type="submit">Ответить</button>
-    </form>
+    ${timer}
+    <div class="main-wrap">
+      <h2 class="title">Выберите ${data.currentGenreName} треки</h2>
+      <form class="genre">
+        ${genreList(data.tracks)}
+        <button class="genre-answer-send" type="submit">Ответить</button>
+      </form>
+    </div>
   </section>
 `);
   const button = genre.querySelector(`button.genre-answer-send`);
@@ -38,15 +41,13 @@ export default (data) => {
   container.addEventListener(`submit`, (evt) => {
     evt.preventDefault();
 
-    const isAllCheckedCorrectly = inputs.every((input) => {
-      if (data.currentGenre === input.value) {
-        return input.checked;
-      } else {
-        return !input.checked;
-      }
-    });
+    if (isAllCheckedCorrectly(inputs, data)) {
 
-    showScreen(result(isAllCheckedCorrectly ? winResult : lossResult));
+      doOnSuccess();
+
+    } else {
+      doOnFault();
+    }
   });
 
 
