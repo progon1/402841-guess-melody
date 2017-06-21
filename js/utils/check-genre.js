@@ -1,7 +1,7 @@
-export default (inputs, data) => {
+export default (inputs, answer) => {
 
   return inputs.every((input) => {
-    if (data.currentGenre === input.value) {
+    if (answer === input.value) {
       return input.checked;
     } else {
       return !input.checked;
