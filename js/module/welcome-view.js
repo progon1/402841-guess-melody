@@ -21,8 +21,6 @@ export default class WelcomeView extends AbstractView {
   bind() {
     const button = this.element.querySelector(`button.main-play`);
     button.addEventListener(`click`, () => {
-      window.sessionStorage.setItem(`currentQuestion`, initialState.question);
-      window.sessionStorage.setItem(`numberOfLive`, initialState.lives);
       this.onStart();
     });
   }

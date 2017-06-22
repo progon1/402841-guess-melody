@@ -52,7 +52,4 @@ export default class ArtistView extends AbstractView {
 
   onSuccess() {}
   onFault() {}
-  onAnswer(answer) {
-    return answer;
-  }
 }

@@ -61,7 +61,6 @@ export default class GenreView extends AbstractView {
       }
     });
 
-
     const players = [...this.element.querySelectorAll(`.player-wrapper`)];
     players.forEach((player, index) => {
       window.initializePlayer(player, `tracks/${level.options[index].trackName}`);
@@ -70,7 +69,4 @@ export default class GenreView extends AbstractView {
 
   onSuccess() {}
   onFault() {}
-  onAnswer(answer) {
-    return answer;
-  }
 }
