@@ -9,13 +9,13 @@ export const initialState = {
 
 export const currentState = {
   passedTime: 0,
-  step: 0,
+  _nextStep: 0,
 
   get nextStep() {
-    return this.step;
+    return this._nextStep;
   },
   set nextStep(next) {
-    this.step = next;
+    this._nextStep = next;
   }
 };
 

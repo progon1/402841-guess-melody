@@ -1,10 +1,9 @@
 import AbstractView from '../view';
-import welcome from './welcome';
 import appLogo from '../components/app-logo';
 import win from '../data/result/win';
 import loss from '../data/result/loss';
 import stat from './../utils/evalStatistics';
-import {changeView} from '../utils';
+
 
 export default class GameOverView extends AbstractView {
   constructor(isWin) {
@@ -32,7 +31,5 @@ export default class GameOverView extends AbstractView {
     });
   }
 
-  onStart() {
-    changeView(welcome());
-  }
+  onStart() {}
 }
