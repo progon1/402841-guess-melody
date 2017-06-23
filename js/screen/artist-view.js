@@ -1,6 +1,5 @@
 import AbstractView from '../view';
 import {getLevel} from '../data/game';
-import timer from '../components/timer';
 import player from '../components/player';
 import artistList from '../components/artist-list';
 
@@ -17,7 +16,6 @@ export default class ArtistView extends AbstractView {
 
     return `
     <section class="main main--level main--level-artist">
-      ${timer}
 
       <div class="main-wrap">
         <div class="main-timer"></div>

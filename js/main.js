@@ -1,4 +1,3 @@
-import {changeView} from './utils';
-import welcome from './module/welcome';
+import Application from './app';
 
-changeView(welcome());
+Application.showWelcome();
