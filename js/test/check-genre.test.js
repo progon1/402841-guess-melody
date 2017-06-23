@@ -12,7 +12,7 @@ const testData = [
 
 describe(`Checking genre answer`, () => {
   it(`should return true when every correct track was selected`, () => {
-    assert(isAllCheckedCorrectly(testData, testGenre));
+    assert(isAllCheckedCorrectly(testData, testGenre.currentGenre));
   });
 
   it(`should returns false when only some correct tracks was selected`, () => {

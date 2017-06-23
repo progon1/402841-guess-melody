@@ -2,7 +2,7 @@ export default Object.freeze({
   trackId: 3,
   trackArtist: `Amanda Fondell`,
   trackName: `Count_On_You.mp3`,
-  songs: [
+  options: [
     {
       id: 1,
       artist: `pelageya`,

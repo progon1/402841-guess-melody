@@ -1,4 +1,4 @@
-import showScreen from './utils/showScreen';
-import welcome from './module/module-welcome';
+import {changeView} from './utils';
+import welcome from './module/welcome';
 
-showScreen(welcome());
+changeView(welcome());
