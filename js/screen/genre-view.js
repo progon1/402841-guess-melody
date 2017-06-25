@@ -2,6 +2,7 @@ import AbstractView from '../view';
 import genreList from '../components/genre-list';
 import {getLevel} from '../data/game';
 import isAllCheckedCorrectly from '../utils/check-genre';
+import initializePlayer from '../player';
 
 let level;
 
@@ -62,7 +63,7 @@ export default class GenreView extends AbstractView {
 
     const players = [...this.element.querySelectorAll(`.player-wrapper`)];
     players.forEach((player, index) => {
-      window.initializePlayer(player, `tracks/${level.options[index].trackName}`);
+      initializePlayer(player, `tracks/${level.options[index].trackName}`);
     });
   }
 

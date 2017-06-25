@@ -1,6 +1,6 @@
 import {currentState} from './data/game';
 
-window.animation = {
+const _animation = {
   getAnimation: (step, stepDuration, steps) => ({
     step, stepDuration, steps
   }),
@@ -11,7 +11,7 @@ window.animation = {
       currentState.nextStep = window.nextStep;
       // console.log(currentState.nextStep);
       if (window.nextStep <= animation.steps) {
-        animation = window.animation.getAnimation(window.nextStep, animation.stepDuration, animation.steps);
+        animation = _animation.getAnimation(window.nextStep, animation.stepDuration, animation.steps);
         callback(animation);
       } else {
         stopFn();
@@ -26,3 +26,5 @@ window.animation = {
     return stopFn;
   }
 };
+
+export default _animation;

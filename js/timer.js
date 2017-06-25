@@ -1,3 +1,6 @@
+import formatTime from './time-format';
+import _animation from './animate';
+
 // Окружность уменьшается за счет штриховки. Фактически, обводка состоит
 // из одного длинного штриха, а пропуск за счет расстояния до следующего
 // штриха. Задача правильной заливки состоит в том, чтобы правильно
@@ -30,7 +33,7 @@ const addLeadingZero = (val) => val < 10 ? `0${val}` : val;
 const redrawTimer = (timer, animation) => {
   const total = animation.stepDuration * animation.steps;
   const passed = animation.stepDuration * animation.step;
-  const timeLeft = window.formatTime(total, passed);
+  const timeLeft = formatTime(total, passed);
 
   timer.querySelector(`.timer-value-mins`).textContent = addLeadingZero(timeLeft.minutes);
   timer.querySelector(`.timer-value-secs`).textContent = addLeadingZero(timeLeft.seconds);
@@ -39,12 +42,12 @@ const redrawTimer = (timer, animation) => {
 };
 
 
-window.initializeCountdown = (step, stepDuration, steps, callback) => {
+const initializeCountdown = (step, stepDuration, steps, callback) => {
   const element = document.querySelector(`.timer-line`);
   const radius = parseInt(element.getAttributeNS(null, `r`), 10);
   const timer = document.querySelector(`.timer-value`);
 
-  return window.animation.animate(window.animation.getAnimation(step, stepDuration, steps), (animation) => {
+  return _animation.animate(_animation.getAnimation(step, stepDuration, steps), (animation) => {
     redrawCircle(element, radius, animation);
     redrawTimer(timer, animation);
   }, (passedTime) => {
@@ -52,3 +55,5 @@ window.initializeCountdown = (step, stepDuration, steps, callback) => {
     callback(passedTime);
   });
 };
+
+export default initializeCountdown;
