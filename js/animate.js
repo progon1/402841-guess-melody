@@ -1,4 +1,4 @@
-import {currentState} from './data/game';
+let nextStep;
 
 const _animation = {
   getAnimation: (step, stepDuration, steps) => ({
@@ -7,11 +7,9 @@ const _animation = {
 
   animate: (animation, callback, callbackEnd) => {
     const interval = setInterval(() => {
-      window.nextStep = animation.step + 1;
-      currentState.nextStep = window.nextStep;
-      // console.log(currentState.nextStep);
-      if (window.nextStep <= animation.steps) {
-        animation = _animation.getAnimation(window.nextStep, animation.stepDuration, animation.steps);
+      nextStep = animation.step + 1;
+      if (nextStep <= animation.steps) {
+        animation = _animation.getAnimation(nextStep, animation.stepDuration, animation.steps);
         callback(animation);
       } else {
         stopFn();

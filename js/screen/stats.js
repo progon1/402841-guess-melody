@@ -1,21 +1,19 @@
-import Application from '../app';
+import app from '../app';
 import StatsView from './stats-view';
 import {changeView} from '../utils';
 
-export default (win, stats) => {
-
-  class Stats {
-    constructor(winParam, statsParam) {
-      this.view = new StatsView(winParam, statsParam);
-    }
-
-    init() {
-      changeView(this.view);
-
-      this.view.onStart = () => {
-        Application.showWelcome();
-      };
-    }
+/**
+ * param {stats} Object*/
+export default class Stats {
+  constructor(stats) {
+    this.view = new StatsView(stats.win, stats.position);
   }
-  return new Stats(win, stats);
-};
+
+  init() {
+    changeView(this.view);
+
+    this.view.onStart = () => {
+      app.showWelcome();
+    };
+  }
+}

@@ -1,13 +1,13 @@
-import Application from '../app';
+import app from '../app';
 import isGameOver from '../utils/isGameOver';
 import {enableTimerLayout} from '../utils';
-import stats from './../utils/evalStatistics';
+import stats from './formatStatistics';
 
 
 const timeOver = (passedTime) => {
   if (isGameOver(passedTime)) {
     enableTimerLayout(false);
-    Application.showStats(false, stats());
+    app.showStats(false, stats());
   }
 };
 
