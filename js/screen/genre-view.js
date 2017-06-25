@@ -2,7 +2,6 @@ import AbstractView from '../view';
 import genreList from '../components/genre-list';
 import {getLevel} from '../data/game';
 import isAllCheckedCorrectly from '../utils/check-genre';
-import timer from '../components/timer';
 
 let level;
 
@@ -17,7 +16,7 @@ export default class GenreView extends AbstractView {
 
     return `
     <section class="main main--level main--level-genre">
-    ${timer}
+
     <div class="main-wrap">
       <h2 class="title">${level.description}</h2>
       <form class="genre">

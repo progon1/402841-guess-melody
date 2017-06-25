@@ -2,13 +2,13 @@ import AbstractView from '../view';
 import appLogo from '../components/app-logo';
 import win from '../data/result/win';
 import loss from '../data/result/loss';
-import stat from './../utils/evalStatistics';
 
 
-export default class GameOverView extends AbstractView {
-  constructor(isWin) {
+export default class StatsView extends AbstractView {
+  constructor(isWin, stats) {
     super();
     this.isWin = isWin;
+    this.stats = stats;
   }
 
   get template() {
@@ -19,7 +19,7 @@ export default class GameOverView extends AbstractView {
       ${appLogo}
       <h2 class="title">${message.title}</h2>
       <div class="main-stat">${message.text}</div>
-      <span class="main-comparison">Это&nbsp;лучше чем у&nbsp;${stat()}%&nbsp;игроков</span>
+      <span class="main-comparison">Это&nbsp;лучше чем у&nbsp;${this.stats}%&nbsp;игроков</span>
       <span role="button" tabindex="0" class="main-replay">Сыграть ещё раз</span>
     </section>`.trim();
   }
