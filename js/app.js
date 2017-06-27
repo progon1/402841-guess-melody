@@ -28,8 +28,8 @@ class Application {
 
   changeController([route = ``, stats]) {
     const Controller = this.routes[route];
-    if (Controller === Stats) {
-      new Controller(JSON.parse(stats)).init();
+    if (stats) {
+      new Controller(JSON.parse(decodeURIComponent(stats))).init();
     } else {
       new Controller().init();
     }
@@ -48,7 +48,7 @@ class Application {
   }
 
   showStats(stats) {
-    location.hash = `${ControllerID.STATS}=${stats}`;
+    location.hash = stats ? `${ControllerID.STATS}=${encodeURIComponent(JSON.stringify(stats))}` : `${ControllerID.STATS}`;
   }
 }
 

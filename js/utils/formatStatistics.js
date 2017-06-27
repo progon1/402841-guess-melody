@@ -1,17 +1,11 @@
-import stat from '../data/statistics';
 import sort from '../utils/sortStatistics';
 
-export default (win) => {
-  const result = stat[stat.length - 1];
-  const sortedStat = sort(stat);
+export default (stats) => {
+  const result = stats[stats.length - 1];
+  const sortedStat = sort(stats);
   const position = sortedStat.findIndex((item) => {
     return item === result;
   });
 
-  const format = {
-    win,
-    position: ((stat.length - (position + 1)) / stat.length) * 100
-  };
-
-  return JSON.stringify(format);
+  return Object.assign(result, {position: ((stats.length - (position + 1)) / stats.length) * 100});
 };

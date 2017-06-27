@@ -1,11 +1,11 @@
 import question from './questions-list';
 
-export const initialState = {
+export const initialState = Object.freeze({
   level: 1,
   lives: 3,
   time: 120,
   dimension: 1000
-};
+});
 
 export const setLives = (game, lives) => {
   if (lives < 0) {

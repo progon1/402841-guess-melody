@@ -5,13 +5,16 @@ import GenreView from './genre-view';
 import {initialState, getLevel, nextLevel, setLives} from '../data/game';
 import {changeView, enableTimerLayout} from '../utils';
 import isLevelOver from '../utils/isLevelOver';
-import stats from './../utils/formatStatistics';
-
+import formatStats from './../utils/formatStatistics';
+import stats from '../data/statistics';
 
 export default class Game {
-  constructor(state = initialState) {
+  constructor(state = Object.assign({}, initialState, {time: 0})) {
     const GameView = getLevel(state.level).type === `artist` ? ArtistView : GenreView;
     this.state = state;
+    setInterval(() => {
+      this.state.time++;
+    }, 1000);
     this.view = new GameView(this.state);
   }
 
@@ -22,7 +25,7 @@ export default class Game {
 
       if (isLevelOver(this.state.level)) {
         enableTimerLayout(false);
-        app.showStats(stats(true));
+        app.showStats(formatStats(stats));
       } else {
         this.state = nextLevel(this.state);
         const GameView = getLevel(this.state.level).type === `artist` ? ArtistView : GenreView;
@@ -41,7 +44,7 @@ export default class Game {
         this.init();
       } else {
         enableTimerLayout(false);
-        app.showStats(stats(false));
+        app.showStats();
       }
     };
   }

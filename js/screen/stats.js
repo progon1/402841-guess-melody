@@ -6,7 +6,7 @@ import {changeView} from '../utils';
  * param {stats} Object*/
 export default class Stats {
   constructor(stats) {
-    this.view = new StatsView(stats.win, stats.position);
+    this.view = stats ? new StatsView(stats) : new StatsView();
   }
 
   init() {
