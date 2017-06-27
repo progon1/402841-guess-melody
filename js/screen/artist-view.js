@@ -1,6 +1,7 @@
 import AbstractView from '../view';
 import {getLevel} from '../data/game';
 import player from '../components/player';
+import initializePlayer from '../player';
 import artistList from '../components/artist-list';
 
 let level;
@@ -45,7 +46,7 @@ export default class ArtistView extends AbstractView {
       }
     });
     const playerWrapper = this.element.querySelector(`.player-wrapper`);
-    window.initializePlayer(playerWrapper, `tracks/${level.trackName}`, true);
+    initializePlayer(playerWrapper, `tracks/${level.trackName}`, true);
   }
 
   onSuccess() {}

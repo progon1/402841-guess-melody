@@ -7,18 +7,6 @@ export const initialState = {
   dimension: 1000
 };
 
-export const currentState = {
-  passedTime: 0,
-  _nextStep: 0,
-
-  get nextStep() {
-    return this._nextStep;
-  },
-  set nextStep(next) {
-    this._nextStep = next;
-  }
-};
-
 export const setLives = (game, lives) => {
   if (lives < 0) {
     throw new RangeError(`Can't set negative lives`);

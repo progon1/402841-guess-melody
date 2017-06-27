@@ -1,19 +1,57 @@
-import welcomeScreen from './screen/welcome';
-import gameScreen from './screen/game';
-import statsScreen from './screen/stats';
+import Welcome from './screen/welcome';
+import Game from './screen/game';
+import Stats from './screen/stats';
 
 
-export default class Application {
+const ControllerID = {
+  WELCOME: ``,
+  GAME: `game`,
+  STATS: `stats`
+};
 
-  static showWelcome() {
-    welcomeScreen().init();
+const getControllerIDFromHash = (hash) => {
+
+  return (hash.replace(`#`, ``).split(`=`));
+};
+
+class Application {
+  constructor() {
+    this.routes = {
+      [ControllerID.WELCOME]: Welcome,
+      [ControllerID.GAME]: Game,
+      [ControllerID.STATS]: Stats
+    };
+    window.onhashchange = () => {
+      this.changeController(getControllerIDFromHash(location.hash));
+    };
   }
 
-  static showGame() {
-    gameScreen().init();
+  changeController([route = ``, stats]) {
+    const Controller = this.routes[route];
+    if (Controller === Stats) {
+      new Controller(JSON.parse(stats)).init();
+    } else {
+      new Controller().init();
+    }
   }
 
-  static showStats(win, stats) {
-    statsScreen(win, stats).init();
+  init() {
+    this.changeController(getControllerIDFromHash(location.hash));
+  }
+
+  showWelcome() {
+    location.hash = ControllerID.WELCOME;
+  }
+
+  showGame() {
+    location.hash = ControllerID.GAME;
+  }
+
+  showStats(stats) {
+    location.hash = `${ControllerID.STATS}=${stats}`;
   }
 }
+
+const app = new Application();
+
+export default app;
