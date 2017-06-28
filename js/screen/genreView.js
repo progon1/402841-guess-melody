@@ -1,7 +1,7 @@
 import AbstractView from '../view';
 import genreList from '../components/genre-list';
 import {getLevel} from '../data/game';
-import isAllCheckedCorrectly from '../utils/check-genre';
+import isAllCheckedCorrectly from '../utils/checkGenre';
 import initializePlayer from '../player';
 
 let level;

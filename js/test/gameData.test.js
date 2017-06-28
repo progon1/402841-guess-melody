@@ -1,5 +1,5 @@
 import assert from 'assert';
-import {initialState, setLives, nextLevel} from './game';
+import {initialState, setLives, nextLevel} from './../data/game';
 
 const testQuestions = {
   'question-1': `test`,

@@ -17,6 +17,8 @@ const getControllerIDFromHash = (hash) => {
 
 class Application {
   constructor() {
+    this.preloader();
+
     this.model = new class extends Model {
       get urlRead() {
         return `https://intensive-ecmascript-server-btfgudlkpi.now.sh/guess-melody/questions`;
@@ -51,6 +53,11 @@ class Application {
 
   init() {
     this.changeController(getControllerIDFromHash(location.hash));
+  }
+
+  preloader() {
+    new Welcome().init();
+    document.querySelector(`button`).style.display = `none`;
   }
 
   showWelcome() {

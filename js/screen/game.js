@@ -7,9 +7,14 @@ import {changeView, enableTimerLayout} from '../utils';
 import isLevelOver from '../utils/isLevelOver';
 import formatStats from './../utils/formatStatistics';
 import stats from '../data/statistics';
+import initializeCountdown from '../timer';
+import timeOver from '../utils/timeOver';
 
 export default class Game {
   constructor(question) {
+    enableTimerLayout(true);
+    initializeCountdown(0, initialState.dimension, initialState.time, timeOver);
+
     this.question = question;
   }
 
