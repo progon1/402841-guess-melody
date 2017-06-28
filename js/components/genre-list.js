@@ -1,7 +1,7 @@
 import player from './player';
 
 export default (tracks) => {
-  const trackList = tracks.map((track, index) => {
+  const trackList = tracks.answers.map((track, index) => {
     let template = `
       <div class="genre-answer">
         ${player}

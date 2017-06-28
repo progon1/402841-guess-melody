@@ -1,4 +1,4 @@
-import app from '../app';
+import app from '../main';
 import StatsView from './stats-view';
 import {changeView} from '../utils';
 

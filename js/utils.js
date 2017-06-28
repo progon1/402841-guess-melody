@@ -16,6 +16,9 @@ export const changeView = (view) => {
 
 export const enableTimerLayout = (enable) => {
   const timer = document.querySelector(`.timer`);
+  if (!timer) {
+    return;
+  }
 
   if (enable) {
     timer.appendChild(createElement(timerLayout));

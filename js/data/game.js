@@ -1,5 +1,3 @@
-import question from './questions-list';
-
 export const initialState = Object.freeze({
   level: 1,
   lives: 3,
@@ -16,11 +14,11 @@ export const setLives = (game, lives) => {
   return game;
 };
 
-export const getLevel = (num) => question[`question-${num}`];
+export const getLevel = (num, question) => question[`question-${num}`];
 
-export const nextLevel = (state) => {
+export const nextLevel = (state, question) => {
   const next = state.level + 1;
-  if (!getLevel(next)) {
+  if (!getLevel(next, question)) {
     throw new RangeError(`Can't find level ${next}`);
   }
   state = Object.assign({}, state);

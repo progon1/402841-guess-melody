@@ -1,6 +1,11 @@
 import assert from 'assert';
 import {initialState, setLives, nextLevel} from './game';
 
+const testQuestions = {
+  'question-1': `test`,
+  'question-2': `test`
+};
+
 describe(`Checking total game time`, () => {
   it(`should return 2`, () => {
     assert.equal(initialState.time / 60, 2);
@@ -19,6 +24,6 @@ describe(`Setting lives`, () => {
 
 describe(`nextLevel`, () => {
   it(`should returns level 2 when there was transition from initial state`, () => {
-    assert.strictEqual(nextLevel(initialState).level, 2);
+    assert.strictEqual(nextLevel(initialState, testQuestions).level, 2);
   });
 });

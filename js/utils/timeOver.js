@@ -1,4 +1,4 @@
-import app from '../app';
+import app from '../main';
 import isGameOver from '../utils/isGameOver';
 import {enableTimerLayout} from '../utils';
 

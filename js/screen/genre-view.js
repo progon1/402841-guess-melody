@@ -7,21 +7,22 @@ import initializePlayer from '../player';
 let level;
 
 export default class GenreView extends AbstractView {
-  constructor(state) {
+  constructor(state, model) {
     super();
     this.state = state;
+    this.model = model;
   }
 
   get template() {
-    level = getLevel(this.state.level);
+    level = getLevel(this.state.level, this.model);
 
     return `
     <section class="main main--level main--level-genre">
 
     <div class="main-wrap">
-      <h2 class="title">${level.description}</h2>
+      <h2 class="title">${level.question}</h2>
       <form class="genre">
-        ${genreList(level.options)}
+        ${genreList(level)}
         <button class="genre-answer-send" type="submit">Ответить</button>
       </form>
     </div>
@@ -52,7 +53,7 @@ export default class GenreView extends AbstractView {
     container.addEventListener(`submit`, (evt) => {
       evt.preventDefault();
 
-      if (isAllCheckedCorrectly(inputs, level.answer)) {
+      if (isAllCheckedCorrectly(inputs, level.genre)) {
 
         this.onSuccess();
 
@@ -63,7 +64,7 @@ export default class GenreView extends AbstractView {
 
     const players = [...this.element.querySelectorAll(`.player-wrapper`)];
     players.forEach((player, index) => {
-      initializePlayer(player, `tracks/${level.options[index].trackName}`);
+      initializePlayer(player, `${level.answers[index].src}`);
     });
   }
 

@@ -1,5 +1,5 @@
 // Приветствие
-import app from '../app';
+import app from '../main';
 import {initialState} from '../data/game';
 import WelcomeView from './welcome-view';
 import {changeView, enableTimerLayout} from '../utils';
@@ -14,6 +14,7 @@ export default class Welcome {
 
   init() {
     changeView(this.view);
+    enableTimerLayout(false);
 
     this.view.onStart = () => {
       app.showGame();

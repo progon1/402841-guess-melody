@@ -7,13 +7,14 @@ import artistList from '../components/artist-list';
 let level;
 
 export default class ArtistView extends AbstractView {
-  constructor(state) {
+  constructor(state, model) {
     super();
     this.state = state;
+    this.model = model;
   }
 
   get template() {
-    level = getLevel(this.state.level);
+    level = getLevel(this.state.level, this.model);
 
     return `
     <section class="main main--level main--level-artist">
@@ -24,7 +25,7 @@ export default class ArtistView extends AbstractView {
         <h2 class="title main-title">Кто исполняет эту песню?</h2>
         ${player}
         <form class="main-list">
-          ${artistList(level.options)}
+          ${artistList(level)}
         </form>
       </div>
     </section>
@@ -36,7 +37,7 @@ export default class ArtistView extends AbstractView {
     container.addEventListener(`click`, (evt) => {
 
       if (evt.target.classList.contains(`main-answer-r`)) {
-        if (level.answer.toLowerCase() === evt.target.getAttribute(`value`)) {
+        if (evt.target.hasAttribute(`data-isCorrect`)) {
 
           this.onSuccess();
 
@@ -46,7 +47,7 @@ export default class ArtistView extends AbstractView {
       }
     });
     const playerWrapper = this.element.querySelector(`.player-wrapper`);
-    initializePlayer(playerWrapper, `tracks/${level.trackName}`, true);
+    initializePlayer(playerWrapper, `${level.src}`, true);
   }
 
   onSuccess() {}
