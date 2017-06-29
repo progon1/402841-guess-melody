@@ -1,7 +1,6 @@
-// Выбор исполнителя: уровень
 import app from '../main';
-import ArtistView from './artist-view';
-import GenreView from './genre-view';
+import ArtistView from './artistView';
+import GenreView from './genreView';
 import {initialState, getLevel, nextLevel, setLives} from '../data/game';
 import {changeView, enableTimerLayout} from '../utils';
 import isLevelOver from '../utils/isLevelOver';

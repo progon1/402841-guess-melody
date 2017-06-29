@@ -2,7 +2,7 @@ import AbstractView from '../view';
 import {getLevel} from '../data/game';
 import player from '../components/player';
 import initializePlayer from '../player';
-import artistList from '../components/artist-list';
+import artistList from '../components/artistList';
 
 let level;
 

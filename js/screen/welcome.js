@@ -1,4 +1,3 @@
-// Приветствие
 import app from '../main';
 import WelcomeView from './welcome-view';
 import {changeView, enableTimerLayout} from '../utils';

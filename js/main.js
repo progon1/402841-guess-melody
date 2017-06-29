@@ -2,7 +2,7 @@ import Welcome from './screen/welcome';
 import Game from './screen/game';
 import Stats from './screen/stats';
 import Model from './model';
-import GuessMelodyAdapter from './data/quess-melody-adapter';
+import guessMelodyAdapter from './data/guessMelodyAdapter';
 
 
 const ControllerID = {
@@ -25,7 +25,7 @@ class Application {
       }
     }();
 
-    this.model.load(GuessMelodyAdapter)
+    this.model.load(guessMelodyAdapter)
       .then((data) => this.setup(data))
       .then(() => this.changeController(getControllerIDFromHash(location.hash)))
       .catch(window.console.error);
@@ -49,10 +49,6 @@ class Application {
     } else {
       controller().init();
     }
-  }
-
-  init() {
-    this.changeController(getControllerIDFromHash(location.hash));
   }
 
   preloader() {

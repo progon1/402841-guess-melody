@@ -1,5 +1,5 @@
 import assert from 'assert';
-import isAllCheckedCorrectly from '../utils/check-genre';
+import isAllCheckedCorrectly from '../utils/checkGenre';
 
 const testGenre = {
   currentGenre: `indie-rock`

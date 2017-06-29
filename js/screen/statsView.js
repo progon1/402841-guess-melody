@@ -1,5 +1,5 @@
 import AbstractView from '../view';
-import appLogo from '../components/app-logo';
+import appLogo from '../components/appLogo';
 import win from '../data/result/win';
 import loss from '../data/result/loss';
 

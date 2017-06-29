@@ -1,5 +1,5 @@
 import AbstractView from '../view';
-import genreList from '../components/genre-list';
+import genreList from '../components/genreList';
 import {getLevel} from '../data/game';
 import isAllCheckedCorrectly from '../utils/checkGenre';
 import initializePlayer from '../player';
