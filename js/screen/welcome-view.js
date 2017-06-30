@@ -1,6 +1,6 @@
 import AbstractView from '../view';
 import {initialState} from '../data/game';
-import appLogo from '../components/app-logo';
+import appLogo from '../components/appLogo';
 
 export default class WelcomeView extends AbstractView {
   get template() {
