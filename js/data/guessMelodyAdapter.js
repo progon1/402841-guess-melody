@@ -6,18 +6,14 @@ const makePlainArray = (question) => {
     urlArr.push(question.src);
   } else {
     question.answers.forEach((it) => {
-      urlArr.push(it.src);
+      if (it.src) {
+        urlArr.push(it.src);
+      }
     });
   }
   return urlArr;
 };
 
-const preloadAudio = (res, rej, url) => {
-  const audio = document.createElement(`audio`);
-  audio.src = url;
-  audio.onloadeddata = () => res(1);
-  audio.onerror = () => rej(2);
-};
 
 export default new class extends DefaultAdapter {
   preprocess(data) {
@@ -31,22 +27,9 @@ export default new class extends DefaultAdapter {
 
       const tmp = [];
       arr.forEach((url) => {
-        tmp.push(new Promise((res, rej) => {
-          preloadAudio(res, rej, url);
-          /* const audio = document.createElement(`audio`);
-          audio.src = url;
-          audio.onloadeddata = () => res(1);
-          audio.onerror = () => rej(2);*/
-        }).then((a) => {
-          window.console.log(a);
-          return a;
-        }, (a) => {
-          window.console.log(a);
-          return a;
-        }));
-        // tmp.push(fetch(url)); // или вместо Promise 34 строка
+        tmp.push(fetch(url));
       });
-      window.console.log(arr);
+
       Promise.all(tmp)
         .then(() => resolve(preprocessed))
         .catch(() => resolve(preprocessed));

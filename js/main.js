@@ -23,9 +23,13 @@ class Application {
       get urlRead() {
         return `https://intensive-ecmascript-server-btfgudlkpi.now.sh/guess-melody/questions`;
       }
+
+      get urlStats() {
+        return `https://intensive-ecmascript-server-btfgudlkpi.now.sh/guess-melody/stats/402841`;
+      }
     }();
 
-    this.model.load(guessMelodyAdapter)
+    this.model.load(this.model.urlRead, guessMelodyAdapter)
       .then((data) => this.setup(data))
       .then(() => this.changeController(getControllerIDFromHash(location.hash)))
       .catch(window.console.error);
@@ -34,7 +38,7 @@ class Application {
   setup(data) {
     this.routes = {
       [ControllerID.WELCOME]: () => new Welcome(),
-      [ControllerID.GAME]: () => new Game(data),
+      [ControllerID.GAME]: () => new Game(this.model, data),
       [ControllerID.STATS]: (stats) => new Stats(stats)
     };
     window.onhashchange = () => {

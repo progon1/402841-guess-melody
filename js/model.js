@@ -19,14 +19,26 @@ export default class Model {
     throw new Error(`Abstract method. Define the URL for model.`);
   }
 
-  get urlWrite() {
+  get urlStats() {
     throw new Error(`Abstract method. Define the URL for model.`);
   }
 
-  load(adapter = defaultAdapter) {
-    return fetch(this.urlRead)
+  load(url, adapter = defaultAdapter) {
+    return fetch(url)
       .then((resp) => resp.json())
       .then(adapter.preprocess);
+  }
+
+  send(data, adapter = defaultAdapter) {
+    const requestSettings = {
+      body: adapter.toServer(data),
+      headers: {
+        'Content-Type': `application/json`
+      },
+      method: `POST`
+    };
+
+    return fetch(this.urlStats, requestSettings);
   }
 }
 
