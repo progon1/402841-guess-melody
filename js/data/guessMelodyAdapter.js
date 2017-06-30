@@ -6,7 +6,9 @@ const makePlainArray = (question) => {
     urlArr.push(question.src);
   } else {
     question.answers.forEach((it) => {
-      urlArr.push(it.src);
+      if (it.src) {
+        urlArr.push(it.src);
+      }
     });
   }
   return urlArr;
