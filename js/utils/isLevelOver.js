@@ -1,3 +1,3 @@
 export default (level) => {
-  return level === 10;
+  return level >= 10;
 };

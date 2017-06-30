@@ -29,7 +29,7 @@ export default new class extends DefaultAdapter {
       arr.forEach((url) => {
         tmp.push(fetch(url));
       });
-      window.console.log(arr);
+
       Promise.all(tmp)
         .then(() => resolve(preprocessed))
         .catch(() => resolve(preprocessed));
