@@ -2,7 +2,8 @@ export const initialState = Object.freeze({
   level: 1,
   lives: 3,
   time: 120,
-  dimension: 1000
+  dimension: 1000,
+  MAX_LEVEL: 10
 });
 
 export const setLives = (game, lives) => {

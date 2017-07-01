@@ -1,6 +1,6 @@
 import assert from 'assert';
 import sort from '../utils/sortStatistics';
-import statistics from '../data/statistics';
+import statistics from '../data/mocks/statistics';
 
 const example = [
   {time: 20, answers: 10},

@@ -15,7 +15,7 @@ export default class Game {
     this.stopCountdown = initializeCountdown(0, initialState.dimension, initialState.time, timeOver);
     this.timerID = setInterval(() => {
       this.state.time++;
-    }, 1000);
+    }, initialState.dimension);
 
     this.model = model;
     this.question = question;
@@ -40,7 +40,7 @@ export default class Game {
     let GameView = getLevel(this.state.level, this.question).type === `artist` ? ArtistView : GenreView;
     this.levelTimerID = setInterval(() => {
       levelTimer++;
-    }, 1000);
+    }, initialState.dimension);
     this.view = new GameView(this.state, this.question);
 
     this.view.onSuccess = () => {
