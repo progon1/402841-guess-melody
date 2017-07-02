@@ -1,19 +1,19 @@
-import app from '../main';
 import StatsView from './statsView';
 import {changeView} from '../utils';
 
 /**
  * param {Object} stats*/
 export default class Stats {
-  constructor(stats) {
+  constructor(stats, app) {
     this.view = stats ? new StatsView(stats) : new StatsView();
+    this.app = app;
   }
 
   init() {
     changeView(this.view);
 
     this.view.onStart = () => {
-      app.showWelcome();
+      this.app.showWelcome();
     };
   }
 }

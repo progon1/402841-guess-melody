@@ -1,11 +1,11 @@
-import app from '../main';
 import WelcomeView from './welcome-view';
 import {changeView, enableTimerLayout} from '../utils';
 
 
 export default class Welcome {
-  constructor() {
+  constructor(app) {
     this.view = new WelcomeView();
+    this.app = app;
   }
 
   init() {
@@ -13,7 +13,7 @@ export default class Welcome {
     enableTimerLayout(false);
 
     this.view.onStart = () => {
-      app.showGame();
+      this.app.showGame();
     };
   }
 }

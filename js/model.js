@@ -23,8 +23,8 @@ export default class Model {
     throw new Error(`Abstract method. Define the URL for model.`);
   }
 
-  load(url, adapter = defaultAdapter) {
-    return fetch(url)
+  load(adapter = defaultAdapter) {
+    return fetch(this.urlRead)
       .then((resp) => resp.json())
       .then(adapter.preprocess);
   }

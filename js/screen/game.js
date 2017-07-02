@@ -1,4 +1,3 @@
-import app from '../main';
 import ArtistView from './artistView';
 import GenreView from './genreView';
 import {initialState, getLevel, nextLevel, setLives} from '../data/game';
@@ -10,12 +9,13 @@ import timeOver from '../utils/timeOver';
 import statsAdapter from '../data/statsAdapter';
 
 export default class Game {
-  constructor(model, question) {
+  constructor(model, question, app) {
+    this.app = app;
     enableTimerLayout(true);
-    this.stopCountdown = initializeCountdown(0, initialState.dimension, initialState.time, timeOver);
+    this.stopCountdown = initializeCountdown(0, initialState.dimension, initialState.time, () => timeOver(app));
     this.timerID = setInterval(() => {
       this.state.time++;
-    }, 1000);
+    }, initialState.dimension);
 
     this.model = model;
     this.question = question;
@@ -40,7 +40,7 @@ export default class Game {
     let GameView = getLevel(this.state.level, this.question).type === `artist` ? ArtistView : GenreView;
     this.levelTimerID = setInterval(() => {
       levelTimer++;
-    }, 1000);
+    }, initialState.dimension);
     this.view = new GameView(this.state, this.question);
 
     this.view.onSuccess = () => {
@@ -74,17 +74,15 @@ export default class Game {
 
   win() {
     this.model.send(this.state, statsAdapter)
-      .then((data) => {
-        return this.model.load(this.model.urlStats, statsAdapter);
-      })
+      .then(this.app.loadStats.bind(this.app))
       .then((data) => {
         enableTimerLayout(false);
-        app.showStats(formatStats(data, this.state.points));
+        this.app.showStats(formatStats(data, this.state.points));
       });
   }
 
   loss() {
     enableTimerLayout(false);
-    app.showStats();
+    this.app.showStats();
   }
 }
