@@ -1,9 +1,7 @@
 import formatTime from './time-format';
 import _animation from './animate';
 
-let timer;
-let timerMins;
-let timerSecs;
+let _timer = {};
 
 // Окружность уменьшается за счет штриховки. Фактически, обводка состоит
 // из одного длинного штриха, а пропуск за счет расстояния до следующего
@@ -33,30 +31,34 @@ const redrawCircle = (circle, radius, animation) => {
 
 const addLeadingZero = (val) => val < 10 ? `0${val}` : val;
 
+const getElement = (selector, parentElement = document) => {
+  if (!_timer[selector]) {
+    _timer[selector] = parentElement.querySelector(`.${selector}`);
+  }
+  return _timer[selector];
+};
 
-const redrawTimer = (animation) => {
+const redrawTimer = (timer, animation) => {
   const total = animation.stepDuration * animation.steps;
   const passed = animation.stepDuration * animation.step;
   const timeLeft = formatTime(total, passed);
 
-  timerMins = timerMins ? timerMins : timer.querySelector(`.timer-value-mins`);
-  timerSecs = timerSecs ? timerSecs : timer.querySelector(`.timer-value-secs`);
-
-  timerMins.textContent = addLeadingZero(timeLeft.minutes);
-  timerSecs.textContent = addLeadingZero(timeLeft.seconds);
+  getElement(`timer-value-mins`, timer).textContent = addLeadingZero(timeLeft.minutes);
+  getElement(`timer-value-secs`, timer).textContent = addLeadingZero(timeLeft.seconds);
 
   return timer;
 };
 
 
 const initializeCountdown = (step, stepDuration, steps, callback) => {
+  _timer = {};
   const element = document.querySelector(`.timer-line`);
   const radius = parseInt(element.getAttributeNS(null, `r`), 10);
-  timer = document.querySelector(`.timer-value`);
+  const timer = getElement(`timer-value`);
 
   return _animation.animate(_animation.getAnimation(step, stepDuration, steps), (animation) => {
     redrawCircle(element, radius, animation);
-    redrawTimer(animation);
+    redrawTimer(timer, animation);
   }, (passedTime) => {
     timer.classList.add(`timer-value--finished`);
     callback(passedTime);

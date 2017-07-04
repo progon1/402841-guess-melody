@@ -12,7 +12,7 @@ export default class Game {
   constructor(model, question, app) {
     this.app = app;
     enableTimerLayout(true);
-    this.stopCountdown = initializeCountdown(0, initialState.dimension, initialState.time, () => timeOver(app));
+    this.stopCountdown = initializeCountdown(0, initialState.dimension, initialState.time, timeOver);
     this.timerID = setInterval(() => {
       this.state.time++;
     }, initialState.dimension);
