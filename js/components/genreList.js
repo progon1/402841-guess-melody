@@ -2,7 +2,7 @@ import player from './player';
 
 export default (tracks) => {
   const trackList = tracks.answers.map((track, index) => {
-    let template = `
+    const template = `
       <div class="genre-answer">
         ${player}
         <input type="checkbox" name="answer" value="${track.genre}" id="a-${index}">
